@@ -65,7 +65,8 @@ export const PRODUCTS: Product[] = [
     category: 'PERAK',
     priceRange: "Mulai dari Rp 200.000",
     image: "/images/8.jpg",
-    features: ["Maskulin", "Tahan Gores", "Warna Tahan Lama"]
+    features: ["Maskulin", "Tahan Gores", "Warna Tahan Lama"],
+    hidden: true, //
   }
 ];
 

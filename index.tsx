@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
-import { 
-  Menu, X, MessageCircle, Star, ChevronDown, ChevronUp, 
+import {
+  Menu, X, MessageCircle, Star, ChevronDown, ChevronUp,
   MapPin, ShoppingBag, ArrowRight, Gem, Circle, Crown,
   ArrowUp, ChevronLeft, ChevronRight, Instagram, Facebook, Twitter
 } from 'lucide-react';
@@ -30,9 +30,8 @@ const FadeInSection: React.FC<{ children: React.ReactNode; className?: string; d
   return (
     <div
       ref={domRef}
-      className={`transition-all duration-1000 transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      } ${className}`}
+      className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -63,9 +62,8 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-24 md:bottom-8 right-6 md:right-8 z-40 bg-white border border-gray-200 text-emerald-900 p-3 rounded-full shadow-lg hover:bg-gray-50 transition-all duration-300 transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-      }`}
+      className={`fixed bottom-24 md:bottom-8 right-6 md:right-8 z-40 bg-white border border-gray-200 text-emerald-900 p-3 rounded-full shadow-lg hover:bg-gray-50 transition-all duration-300 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+        }`}
       aria-label="Scroll to top"
     >
       <ArrowUp size={20} />
@@ -97,10 +95,11 @@ const App = () => {
   const [openFaqId, setOpenFaqId] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-  // Filter products
-  const filteredProducts = activeCategory === 'ALL' 
-    ? PRODUCTS 
-    : PRODUCTS.filter(p => p.category === activeCategory);
+  // Filter products + sembunyikan yang hidden
+  const filteredProducts = PRODUCTS.filter(
+    (p) => !p.hidden && (activeCategory === 'ALL' || p.category === activeCategory)
+  );
+
 
   // Toggle FAQ
   const toggleFaq = (id: number) => {
@@ -126,7 +125,7 @@ const App = () => {
 
   // WhatsApp Link Helper
   // Updated with real number
-  const waNumber = "6287814031427"; 
+  const waNumber = "6287814031427";
   const baseWaLink = `https://wa.me/${waNumber}`;
 
   // Image Error Handler
@@ -136,7 +135,7 @@ const App = () => {
 
   return (
     <div className="font-sans text-dark-900 bg-white selection:bg-emerald-900 selection:text-white">
-      
+
       {/* --- Navbar --- */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
@@ -151,8 +150,8 @@ const App = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600">
             {['Beranda', 'Koleksi', 'Keunggulan', 'Cara Order', 'Testimoni', 'FAQ', 'Kontak'].map((item) => (
-              <a 
-                key={item} 
+              <a
+                key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
                 className="hover:text-emerald-900 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-emerald-900 after:left-0 after:-bottom-1 after:transition-all hover:after:w-full"
               >
@@ -163,16 +162,16 @@ const App = () => {
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center space-x-4">
-            <a 
-              href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20ingin%20konsultasi.`} 
-              target="_blank" 
+            <a
+              href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20ingin%20konsultasi.`}
+              target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 bg-emerald-900 text-white px-5 py-2.5 rounded-full text-xs font-semibold hover:bg-emerald-800 transition-transform hover:scale-105 shadow-lg shadow-emerald-900/20"
             >
               <MessageCircle size={16} />
               Chat WhatsApp
             </a>
-            <button 
+            <button
               className="md:hidden text-gray-700 hover:text-emerald-900 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
@@ -184,26 +183,26 @@ const App = () => {
 
         {/* Mobile Menu */}
         <div className={`md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
-            <div className="flex flex-col p-6 space-y-4">
-              {['Beranda', 'Koleksi', 'Keunggulan', 'Cara Order', 'Testimoni', 'FAQ', 'Kontak'].map((item) => (
-                <a 
-                  key={item} 
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-lg font-medium text-gray-800 hover:text-emerald-900"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
-              <a 
-                href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20ingin%20konsultasi.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-emerald-900 text-white px-4 py-3 rounded-lg font-semibold active:scale-95 transition-transform"
+          <div className="flex flex-col p-6 space-y-4">
+            {['Beranda', 'Koleksi', 'Keunggulan', 'Cara Order', 'Testimoni', 'FAQ', 'Kontak'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-lg font-medium text-gray-800 hover:text-emerald-900"
+                onClick={() => setIsMenuOpen(false)}
               >
-                <MessageCircle size={18} /> Chat Sekarang
+                {item}
               </a>
-            </div>
+            ))}
+            <a
+              href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20ingin%20konsultasi.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-emerald-900 text-white px-4 py-3 rounded-lg font-semibold active:scale-95 transition-transform"
+            >
+              <MessageCircle size={18} /> Chat Sekarang
+            </a>
+          </div>
         </div>
       </nav>
 
@@ -211,9 +210,9 @@ const App = () => {
       <section id="beranda" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/hero.jpg" 
-            alt="Luxury Rings Background" 
+          <img
+            src="/images/hero.jpg"
+            alt="Luxury Rings Background"
             className="w-full h-full object-cover animate-[scale_20s_ease-in-out_infinite_alternate]"
             style={{ animationName: 'kenburns' }}
           />
@@ -231,13 +230,13 @@ const App = () => {
               Humaini Jewellery menghadirkan koleksi cincin permata, perak, dan emas dengan desain modern dan timeless. Simbol cinta yang sempurna untuk lamaran, hadiah, atau koleksi pribadi.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
+              <a
                 href="#koleksi"
                 className="px-8 py-4 bg-gold-500 hover:bg-gold-400 text-white font-semibold rounded-full transition-all hover:scale-105 shadow-xl shadow-gold-500/20 w-full sm:w-auto"
               >
                 Lihat Koleksi Cincin
               </a>
-              <a 
+              <a
                 href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20ingin%20konsultasi.`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -248,11 +247,11 @@ const App = () => {
               </a>
             </div>
             <div className="mt-12 flex justify-center gap-6 text-xs md:text-sm font-light tracking-wide text-gray-300 opacity-80">
-              <span className="flex items-center gap-1"><Gem size={14} className="text-gold-400"/> Custom Ukuran</span>
+              <span className="flex items-center gap-1"><Gem size={14} className="text-gold-400" /> Custom Ukuran</span>
               <span>•</span>
-              <span className="flex items-center gap-1"><Crown size={14} className="text-gold-400"/> Garansi Keaslian</span>
+              <span className="flex items-center gap-1"><Crown size={14} className="text-gold-400" /> Garansi Keaslian</span>
               <span>•</span>
-              <span className="flex items-center gap-1"><MapPin size={14} className="text-gold-400"/> Kirim se-Indonesia</span>
+              <span className="flex items-center gap-1"><MapPin size={14} className="text-gold-400" /> Kirim se-Indonesia</span>
             </div>
           </FadeInSection>
         </div>
@@ -269,9 +268,9 @@ const App = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Kartu 1 */}
             <FadeInSection delay={100}>
-              <div 
+              <div
                 className="group bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 p-8 rounded-2xl text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative overflow-hidden h-full flex flex-col items-center justify-between"
-                onClick={() => { setActiveCategory('PERMATA'); document.getElementById('produk')?.scrollIntoView({behavior: 'smooth'}); }}
+                onClick={() => { setActiveCategory('PERMATA'); document.getElementById('produk')?.scrollIntoView({ behavior: 'smooth' }); }}
               >
                 <div>
                   <div className="w-16 h-16 mx-auto bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mb-6 group-hover:bg-emerald-900 group-hover:text-gold-400 transition-colors">
@@ -288,9 +287,9 @@ const App = () => {
 
             {/* Kartu 2 */}
             <FadeInSection delay={200}>
-              <div 
+              <div
                 className="group bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 p-8 rounded-2xl text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative overflow-hidden h-full flex flex-col items-center justify-between"
-                onClick={() => { setActiveCategory('PERAK'); document.getElementById('produk')?.scrollIntoView({behavior: 'smooth'}); }}
+                onClick={() => { setActiveCategory('PERAK'); document.getElementById('produk')?.scrollIntoView({ behavior: 'smooth' }); }}
               >
                 <div>
                   <div className="w-16 h-16 mx-auto bg-gray-200 text-gray-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gray-800 group-hover:text-white transition-colors">
@@ -307,9 +306,9 @@ const App = () => {
 
             {/* Kartu 3 */}
             <FadeInSection delay={300}>
-              <div 
+              <div
                 className="group bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 p-8 rounded-2xl text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer relative overflow-hidden h-full flex flex-col items-center justify-between"
-                onClick={() => { setActiveCategory('EMAS'); document.getElementById('produk')?.scrollIntoView({behavior: 'smooth'}); }}
+                onClick={() => { setActiveCategory('EMAS'); document.getElementById('produk')?.scrollIntoView({ behavior: 'smooth' }); }}
               >
                 <div>
                   <div className="w-16 h-16 mx-auto bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-colors">
@@ -333,18 +332,17 @@ const App = () => {
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-emerald-900 mb-4">Koleksi Cincin Unggulan</h2>
             <p className="text-gray-600 mb-8">Pilihan terbaik yang paling diminati pelanggan kami.</p>
-            
+
             {/* Filter Tabs */}
             <div className="flex flex-wrap justify-center gap-3">
               {['ALL', 'PERMATA', 'PERAK', 'EMAS'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat as Category)}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeCategory === cat 
-                      ? 'bg-emerald-900 text-white shadow-lg scale-105' 
+                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat
+                      ? 'bg-emerald-900 text-white shadow-lg scale-105'
                       : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 hover:text-emerald-900'
-                  }`}
+                    }`}
                 >
                   {cat === 'ALL' ? 'Semua Koleksi' : `Cincin ${cat.charAt(0) + cat.slice(1).toLowerCase()}`}
                 </button>
@@ -358,9 +356,9 @@ const App = () => {
               <FadeInSection key={product.id} className="h-full">
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group h-full flex flex-col border border-gray-100">
                   <div className="relative overflow-hidden aspect-square bg-gray-100">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
+                    <img
+                      src={product.image}
+                      alt={product.name}
                       onError={handleImageError}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                     />
@@ -371,7 +369,7 @@ const App = () => {
                   <div className="p-6 flex flex-col flex-grow">
                     <h3 className="font-serif text-lg font-bold text-gray-900 mb-2 leading-tight">{product.name}</h3>
                     <p className="text-gold-500 font-semibold mb-4 text-sm">{product.priceRange}</p>
-                    
+
                     <ul className="text-xs text-gray-500 mb-6 space-y-1 flex-grow">
                       {product.features.map((feat, idx) => (
                         <li key={idx} className="flex items-center gap-2">
@@ -379,8 +377,8 @@ const App = () => {
                         </li>
                       ))}
                     </ul>
-                    
-                    <a 
+
+                    <a
                       href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20tertarik%20dengan%20produk:%20${encodeURIComponent(product.name)}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -393,7 +391,7 @@ const App = () => {
               </FadeInSection>
             ))}
           </div>
-          
+
           {filteredProducts.length === 0 && (
             <div className="text-center py-20 bg-white rounded-xl shadow-sm border border-gray-100">
               <p className="text-gray-500">Maaf, belum ada produk untuk kategori ini.</p>
@@ -405,8 +403,8 @@ const App = () => {
       {/* --- Keunggulan --- */}
       <section id="keunggulan" className="py-20 bg-emerald-900 text-white relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" 
-             style={{ backgroundImage: 'radial-gradient(circle, #D4AF37 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(circle, #D4AF37 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <FadeInSection className="text-center mb-16">
@@ -443,7 +441,7 @@ const App = () => {
           <div className="relative">
             {/* Connecting Line (Desktop) */}
             <div className="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
                 { step: "01", title: "Pilih Model", desc: "Jelajahi katalog cincin permata, perak, atau emas kami." },
@@ -468,48 +466,48 @@ const App = () => {
       <section id="testimoni" className="py-20 bg-gray-50 overflow-hidden">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-emerald-900 mb-12">Kata Mereka</h2>
-          
+
           <div className="relative bg-white p-8 md:p-16 rounded-2xl shadow-xl shadow-emerald-900/5 transition-all">
             {/* Quote Icon Background */}
             <div className="absolute top-8 left-8 text-gray-100 select-none pointer-events-none">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" /></svg>
+              <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" /></svg>
             </div>
 
             <div className="text-gold-400 mb-6 flex justify-center gap-1 relative z-10">
               {[...Array(TESTIMONIALS[activeTestimonial].rating)].map((_, i) => <Star key={i} size={20} fill="#D4AF37" />)}
             </div>
-            
+
             <div className="min-h-[120px] flex items-center justify-center relative z-10">
               <p className="font-serif text-xl md:text-2xl text-gray-700 italic leading-relaxed animate-fade-in transition-opacity duration-500">
                 "{TESTIMONIALS[activeTestimonial].comment}"
               </p>
             </div>
-            
+
             <div className="flex flex-col items-center mt-8 relative z-10">
               <div className="font-bold text-emerald-900 text-lg">{TESTIMONIALS[activeTestimonial].name}</div>
               <div className="text-sm text-gray-500">{TESTIMONIALS[activeTestimonial].city}</div>
             </div>
 
             {/* Navigation Buttons */}
-            <button 
-                onClick={prevTestimonial}
-                className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors"
-                aria-label="Previous testimonial"
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors"
+              aria-label="Previous testimonial"
             >
-                <ChevronLeft size={24} />
+              <ChevronLeft size={24} />
             </button>
-            <button 
-                onClick={nextTestimonial}
-                className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors"
-                aria-label="Next testimonial"
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors"
+              aria-label="Next testimonial"
             >
-                <ChevronRight size={24} />
+              <ChevronRight size={24} />
             </button>
 
             {/* Dots */}
             <div className="flex justify-center gap-2 mt-8">
               {TESTIMONIALS.map((_, idx) => (
-                <button 
+                <button
                   key={idx}
                   onClick={() => setActiveTestimonial(idx)}
                   className={`h-2 rounded-full transition-all duration-300 ${idx === activeTestimonial ? 'w-8 bg-emerald-900' : 'w-2 bg-gray-300 hover:bg-gray-400'}`}
@@ -539,13 +537,12 @@ const App = () => {
                 >
                   <span className="font-semibold text-gray-800 pr-4">{faq.question}</span>
                   <div className={`transition-transform duration-300 ${openFaqId === faq.id ? 'rotate-180' : ''}`}>
-                    <ChevronDown size={20} className="text-gray-500"/>
+                    <ChevronDown size={20} className="text-gray-500" />
                   </div>
                 </button>
-                <div 
-                  className={`overflow-hidden transition-all duration-300 ease-in-out bg-white ${
-                    openFaqId === faq.id ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                  }`}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out bg-white ${openFaqId === faq.id ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
                 >
                   <div className="p-5 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
                     {faq.answer}
@@ -571,7 +568,7 @@ const App = () => {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {/* WhatsApp */}
-            <a 
+            <a
               href={`${baseWaLink}?text=Halo%20Humaini%20Jewellery,%20saya%20ingin%20konsultasi.`}
               target="_blank"
               rel="noopener noreferrer"
@@ -582,11 +579,11 @@ const App = () => {
               </div>
               <h3 className="font-bold text-xl text-gray-900 mb-1">Chat WhatsApp</h3>
               <p className="text-gray-500 text-sm mb-4">Konsultasi model & ukuran</p>
-              <span className="text-emerald-700 font-semibold text-sm flex items-center gap-1 group-hover:text-emerald-900">Chat Sekarang <ArrowRight size={14}/></span>
+              <span className="text-emerald-700 font-semibold text-sm flex items-center gap-1 group-hover:text-emerald-900">Chat Sekarang <ArrowRight size={14} /></span>
             </a>
 
             {/* Shopee */}
-            <a 
+            <a
               href="https://id.shp.ee/33t4rmD"
               target="_blank"
               rel="noopener noreferrer"
@@ -597,11 +594,11 @@ const App = () => {
               </div>
               <h3 className="font-bold text-xl text-gray-900 mb-1">Shopee</h3>
               <p className="text-gray-500 text-sm mb-4">Official Store Humaini</p>
-              <span className="text-orange-600 font-semibold text-sm flex items-center gap-1 group-hover:text-orange-700">Kunjungi Toko <ArrowRight size={14}/></span>
+              <span className="text-orange-600 font-semibold text-sm flex items-center gap-1 group-hover:text-orange-700">Kunjungi Toko <ArrowRight size={14} /></span>
             </a>
 
             {/* Tokopedia */}
-            <a 
+            <a
               href="#"
               onClick={(e) => e.preventDefault()}
               className="bg-white hover:bg-green-50 p-8 rounded-2xl shadow-lg transition-transform hover:-translate-y-2 flex flex-col items-center group cursor-pointer opacity-80"
@@ -612,7 +609,7 @@ const App = () => {
               </div>
               <h3 className="font-bold text-xl text-gray-900 mb-1">Tokopedia</h3>
               <p className="text-gray-500 text-sm mb-4">Segera Hadir</p>
-              <span className="text-green-600 font-semibold text-sm flex items-center gap-1 group-hover:text-green-700">Kunjungi Toko <ArrowRight size={14}/></span>
+              <span className="text-green-600 font-semibold text-sm flex items-center gap-1 group-hover:text-green-700">Kunjungi Toko <ArrowRight size={14} /></span>
             </a>
           </div>
 
@@ -631,16 +628,16 @@ const App = () => {
               <h4 className="font-serif text-2xl font-bold text-white mb-2">Humaini Jewellery</h4>
               <p className="text-sm text-gray-500 max-w-xs">Keindahan abadi dalam setiap detail. Cincin permata, perak, dan emas berkualitas tinggi.</p>
             </div>
-            
+
             <div className="flex gap-6">
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-emerald-900 hover:text-white transition-colors"><Instagram size={18} /></a>
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors"><Facebook size={18} /></a>
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors"><Twitter size={18} /></a>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-             <div className="text-center md:text-left">
+            <div className="text-center md:text-left">
               &copy; {new Date().getFullYear()} Humaini Jewellery.
             </div>
             <div className="flex gap-6">
