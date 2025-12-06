@@ -5,59 +5,59 @@ import React from 'react';
 export const PRODUCTS: Product[] = [
   {
     id: 1,
-    name: "Cincin Permata Aurora Silver",
-    category: 'PERMATA',
-    priceRange: "Mulai dari Rp 450.000",
-    image: "/images/1.jpg",
-    features: ["Batu Zircon Premium", "Perak 925 Sterling", "Anti Karat"]
+    name: "Cincin Perak Zambrud dan Berlian",
+    category: 'PERAK',
+    priceRange: "Mulai dari Rp 8.500.000",
+    image: "/images/zamrud.jpg",
+    features: ["Mata utama zamrud 2.40 crat -+", "keliling berlian eropa 30 pcs", "ring silver Anti Karat"]
   },
   {
     id: 2,
-    name: "Cincin Emas Royal Classic",
-    category: 'EMAS',
-    priceRange: "Mulai dari Rp 1.500.000",
-    image: "/images/2.jpg",
-    features: ["Emas 10K / 17K", "Desain Timeless", "Sertifikat Asli"]
+    name: "Cincin Perak Silver Paladium",
+    category: 'PERAK',
+    priceRange: "Mulai dari Rp 10.500.000",
+    image: "/images/silverpaladium.jpg",
+    features: ["Natural Diamond (center) 16pcs 0.83 crt", "Natural diamond (side)1.04 crt", "Ring size 22, Anti Karat, Sertifikat Asli"]
   },
   {
     id: 3,
-    name: "Cincin Perak Minimalis Flow",
+    name: "Cincin Perak paladium berlian eropa top Quality",
     category: 'PERAK',
-    priceRange: "Mulai dari Rp 250.000",
-    image: "/images/3.jpg",
-    features: ["Simpel & Elegan", "Nyaman Dipakai Harian", "Custom Ukuran"]
+    priceRange: "Mulai dari Rp 5.650.000",
+    image: "/images/berlianerofa.jpg",
+    features: ["Berat berlian 1.37 crt", "Berlian 50 Biji", "Free Sertifikat"]
   },
   {
     id: 4,
-    name: "Cincin Tunangan Diamond Solitaire",
+    name: "Cincin  Cowonk Ring Perak",
     category: 'PERAK',
-    priceRange: "Mulai dari Rp 850.000",
-    image: "/images/4.jpg",
-    features: ["Moissanite / Berlian", "Emas Putih / Perak", "Box Beludru"]
+    priceRange: "Mulai dari Rp 11.500.000",
+    image: "/images/ringperak.jpg",
+    features: ["Center Natural diamond 1 pcs berat 0.50 crt (banjar)", "Side 154 pcs 1.09 crt -+", "Size 18/19"]
   },
   {
     id: 5,
-    name: "Cincin Couple Eternal Love",
+    name: "Cincin Cowok Ring Perak",
     category: 'PERAK',
-    priceRange: "Mulai dari Rp 550.000 (Sepasang)",
-    image: "/images/5.jpg",
-    features: ["Grafir Nama Gratis", "Desain Adjustable", "Anti Alergi"]
+    priceRange: "Mulai dari Rp 5.500.000",
+    image: "/images/ringperak1.jpg",
+    features: ["Center Natural blue sapphire berat 1.50 crt ", "Side natural diamond 26 pcs 0.40 crt", "Free Sertifikat, Free Box"]
   },
   {
     id: 6,
-    name: "Cincin Emas Murni 24K Heritage",
-    category: 'EMAS',
-    priceRange: "Mulai dari Rp 3.000.000",
-    image: "/images/6.jpg",
-    features: ["Investasi Cerdas", "Desain Ukiran Klasik", "Sertifikat Resmi"]
+    name: "Cincin Silver Paladium Perak",
+    category: 'PERAK',
+    priceRange: "Mulai dari Rp 12.500.000",
+    image: "/images/ringperak2.jpg",
+    features: ["Natural Diamond (center)1.14 crt (eropa)", "Natural diamond (side)92 pcs (eropa)", "Ring size 22"]
   },
   {
     id: 7,
-    name: "Blue Sapphire Elegance",
-    category: 'PERMATA',
-    priceRange: "Mulai dari Rp 600.000",
-    image: "/images/7.jpg",
-    features: ["Batu Safir Lab-Grown", "Aksen Zircon", "Mewah & Anggun"]
+    name: "Cincin Perak Paladium",
+    category: 'PERAK',
+    priceRange: "Mulai dari Rp 12.500.000",
+    image: "/images/mewah.jpg",
+    features: ["Center Natural yellow sapphire (berat 2.40 crt", "Side narural diamond 144 pcs Berat 1.57 crt", "Mewah & Anggun"]
   },
   {
     id: 8,
